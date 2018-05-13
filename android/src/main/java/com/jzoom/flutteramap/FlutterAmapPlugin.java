@@ -1,5 +1,7 @@
 package com.jzoom.flutteramap;
 
+import android.view.SurfaceView;
+
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;

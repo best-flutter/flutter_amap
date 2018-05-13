@@ -1,3 +1,10 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 05-13-2018
 
-* TODO: Describe initial release.
+* IOS Support
+* Android Support
+* Support for amap
+* Support for location change update
+* Support for adding marker
+* Support for adding marker touch callbacks
+* Support for changing zoom level
+

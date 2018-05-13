@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_amap/flutter_amap.dart';
 
-void main() => runApp(new MyApp());
+void main(){
+  FlutterAmap.setApiKey("0787b16ca4fd97815b1d354571e9f9c1");
+  runApp(new MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -10,33 +13,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+
+  FlutterAmap amap = new FlutterAmap();
 
   @override
   initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await FlutterAmap.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted)
-      return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
@@ -47,9 +29,25 @@ class _MyAppState extends State<MyApp> {
           title: new Text('Plugin example app'),
         ),
         body: new Center(
-          child: new Text('Running on: $_platformVersion\n'),
+          child: new InkWell(child: new Text("Show Map"),onTap: this.show)
         ),
       ),
     );
+  }
+
+
+  void show(){
+    amap.show(
+        mapview: new AMapView(
+            centerCoordinate: new LatLng(39.9242, 116.3979),
+            zoomLevel: 13.0,
+            mapType: MapType.night,
+            showsUserLocation: true),
+        title: new TitleOptions(title: "我的地图"));
+    amap.onLocationUpdated.listen((Location location){
+
+      print("Location changed $location") ;
+
+    });
   }
 }

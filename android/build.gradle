@@ -32,3 +32,6 @@ android {
         disable 'InvalidPackage'
     }
 }
+dependencies {
+    compile 'com.amap.api:3dmap:latest.integration'
+}
