@@ -170,8 +170,7 @@
 - (void)mapView:(AMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation{
     [self.channel invokeMethod:@"locationUpdate" arguments:@{@"latitude": @(userLocation.coordinate.latitude),
                                                @"longitude": @(userLocation.coordinate.longitude),
-                                               @"horizontalAccuracy": @(userLocation.location.horizontalAccuracy),
-                                               @"verticalAccuracy":@(userLocation.location.verticalAccuracy),
+                                               @"accuracy": @((userLocation.location.horizontalAccuracy + userLocation.location.verticalAccuracy)/2),
                                                @"altitude": @(userLocation.location.altitude),
                                                @"speed": @(userLocation.location.speed),
                                                @"timestamp": @(userLocation.location.timestamp.timeIntervalSince1970),}];

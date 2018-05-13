@@ -1,8 +1,8 @@
 name: flutter_amap
-description: A Flutter plugin use amap3d.高德地图flutter组件
+description: A Flutter plugin use amap3d.
 version: 0.0.1
-author:JZoom<jzoom8112@gmail.com>
-homepage:https://github.com/jzoom/flutter_amap
+author: JZoom<jzoom8112@gmail.com>
+homepage: https://github.com/jzoom/flutter_amap
 
 
 environment:

@@ -2,9 +2,7 @@
 
 * IOS Support
 * Android Support
-* Support for amap
+* Support for full screen map
 * Support for location change update
-* Support for adding marker
-* Support for adding marker touch callbacks
-* Support for changing zoom level
+
 

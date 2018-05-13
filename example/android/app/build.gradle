@@ -21,6 +21,21 @@ android {
         disable 'InvalidPackage'
     }
 
+    signingConfigs {
+        release {
+            keyAlias 'flutter_amap'
+            keyPassword '123456'
+            storeFile file('flutter_amap_example.keystore')
+            storePassword '123456'
+        }
+        debug {
+            keyAlias 'flutter_amap'
+            keyPassword '123456'
+            storeFile file('flutter_amap_example.keystore')
+            storePassword '123456'
+        }
+    }
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.jzoom.flutteramapexample"
@@ -29,7 +44,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
     }
+
+
 
     buildTypes {
         release {
@@ -43,6 +62,8 @@ android {
 flutter {
     source '../..'
 }
+
+
 
 dependencies {
     testImplementation 'junit:junit:4.12'
