@@ -4,5 +4,7 @@
 * Android Support
 * Support for full screen map
 * Support for location change update
+* Support for basic map options
+
 
 
