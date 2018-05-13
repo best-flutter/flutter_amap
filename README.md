@@ -72,7 +72,7 @@ import 'package:flutter_amap/flutter_amap.dart';
 
 ```
 dependencies:
-  flutter_alipay: "^0.1.0"
+  flutter_alipay: "^0.0.1"
 ```
 
 
