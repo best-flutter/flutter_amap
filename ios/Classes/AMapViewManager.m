@@ -168,12 +168,16 @@
  * @param updatingLocation 标示是否是location数据更新, YES:location数据更新 NO:heading数据更新
  */
 - (void)mapView:(AMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation{
-    [self.channel invokeMethod:@"locationUpdate" arguments:@{@"latitude": @(userLocation.coordinate.latitude),
-                                               @"longitude": @(userLocation.coordinate.longitude),
-                                               @"accuracy": @((userLocation.location.horizontalAccuracy + userLocation.location.verticalAccuracy)/2),
-                                               @"altitude": @(userLocation.location.altitude),
-                                               @"speed": @(userLocation.location.speed),
-                                               @"timestamp": @(userLocation.location.timestamp.timeIntervalSince1970),}];
+    [self.channel invokeMethod:@"locationUpdate"
+                     arguments:
+  @{
+    @"id": mapView.key,
+       @"latitude": @(userLocation.coordinate.latitude),
+       @"longitude": @(userLocation.coordinate.longitude),
+       @"accuracy": @((userLocation.location.horizontalAccuracy + userLocation.location.verticalAccuracy)/2),
+       @"altitude": @(userLocation.location.altitude),
+       @"speed": @(userLocation.location.speed),
+       @"timestamp": @(userLocation.location.timestamp.timeIntervalSince1970),}];
   
     
 }

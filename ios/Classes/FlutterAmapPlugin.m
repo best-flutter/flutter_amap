@@ -6,7 +6,9 @@
 #import <CoreLocation/CLLocation.h>
 
 @interface FlutterAmapPlugin()
-
+{
+    NSMutableDictionary* _dic;
+}
 @property (nonatomic, assign) UIViewController *root;
 @property (nonatomic, assign) FlutterMethodChannel *channel;
 @property (nonatomic,retain) AMapViewManager *manager;
@@ -29,11 +31,14 @@
 }
  */
 
+
+
 - (id)initWithRoot:(UIViewController *)root channel:(FlutterMethodChannel *)channel {
     if (self = [super init]) {
         self.root = root;
         self.channel = channel;
         self.manager = [[AMapViewManager alloc]initWithMessageChannel:channel];
+        _dic = [[NSMutableDictionary alloc]init];
     }
     return self;
 }
@@ -46,13 +51,36 @@
     } else if ([@"show" isEqualToString:method]){
         NSDictionary *args = call.arguments;
         NSDictionary* mapView = args[@"mapView"];
-        NSDictionary* title = args[@"title"];
+        NSString* title = args[@"id"];
         
-        [self show:mapView title:title];
+        [self show:mapView key:title];
         result(@YES);
         
     } else if([@"dismiss" isEqualToString:method ]) {
         [self dismiss];
+        result(@YES);
+    }else if([@"rect" isEqualToString:method ]) {
+        
+         NSDictionary *args = call.arguments;
+        double x = [args[@"x"] doubleValue];
+        double y = [args[@"y"] doubleValue];
+        double width = [args[@"width"] doubleValue];
+        double height = [args[@"height"] doubleValue];
+        NSString* key = args[@"id"];
+        
+        UIView* view = _dic[key];
+        view.frame = CGRectMake(x, y, width, height);
+    }else if([@"remove" isEqualToString:method ]) {
+        NSDictionary *args = call.arguments;
+        NSString* key = args[@"id"];
+        [self remove: key ];
+        result(@YES);
+    }else if([@"hide" isEqualToString:method ]) {
+        NSDictionary *args = call.arguments;
+        NSString* key = args[@"id"];
+        BOOL hide = [args[@"hide"]boolValue];
+        UIView* view = _dic[key];
+        view.hidden = hide;
         result(@YES);
     }else {
         result(FlutterMethodNotImplemented);
@@ -116,33 +144,25 @@
     
 }
 
--(void)show:(NSDictionary*)mapView title:(NSDictionary*)title{
-    NSLog(@"%lf", kCLDistanceFilterNone);
+-(void)show:(NSDictionary*)mapView key:(NSString*)key{
+   NSLog(@"%lf", kCLDistanceFilterNone);
     //将属性映射到view上面
-    UIViewController *vc = [[UIViewController alloc] init ];
     AMapView* amapView = (AMapView*)[self.manager view];
+    amapView.key = key;
     [self updateViewProps:mapView amapView:amapView];
-    
-    vc.view = amapView;
-    self.mapViewController = vc;
-    vc.title = title[@"title"];
-    BOOL showsNavBar = [title[@"showNavBar"] boolValue];
-    
-    UIBarButtonItem *btnRight = [[UIBarButtonItem alloc] initWithTitle:@"Close"                 style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
-    btnRight.tintColor = [UIColor blueColor];
-    
-    vc.navigationItem.rightBarButtonItems = @[btnRight];
-    
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:vc];
-    if(!showsNavBar){
-        [navController setNavigationBarHidden:YES animated:NO];
-    }
-    
-    
+    _dic[key]  = amapView;
     // navController.navigationBar.translucent = NO;
-    [self.root presentViewController:navController animated:true completion:nil];
+    [self.root.view addSubview:amapView];
+    
 }
 
+
+-(void)remove : (NSString*) key{
+    AMapView* view = _dic[key] ;
+    [view removeFromSuperview];
+    [_dic removeObjectForKey:key];
+    
+}
 
 
 

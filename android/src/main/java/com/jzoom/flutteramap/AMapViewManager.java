@@ -12,7 +12,7 @@ import java.util.Map;
 
 import io.flutter.plugin.common.MethodChannel;
 
-public class AMapViewManager implements AMap.OnMyLocationChangeListener {
+public class AMapViewManager {
 
 
     private MethodChannel channel;
@@ -25,8 +25,21 @@ public class AMapViewManager implements AMap.OnMyLocationChangeListener {
 
 
     public AMapView createView(Context context){
-        AMapView view = new AMapView(context);
-        view.getMap().setOnMyLocationChangeListener(this);
+        final AMapView view = new AMapView(context);
+        view.getMap().setOnMyLocationChangeListener(new AMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(Location location) {
+                Map<String,Object> map = new HashMap<String,Object>();
+                map.put("latitude",location.getLatitude());
+                map.put("longitude",location.getLongitude());
+                map.put("accuracy",location.getAccuracy());
+                map.put("altitude",location.getAltitude());
+                map.put("speed",location.getSpeed());
+                map.put("timestamp",(double)location.getTime() / 1000);
+                map.put("id",view.getKey());
+                channel.invokeMethod("locationUpdate",map);
+            }
+        });
         return view;
     }
 
@@ -55,18 +68,6 @@ public class AMapViewManager implements AMap.OnMyLocationChangeListener {
     }
 
 
-    @Override
-    public void onMyLocationChange(Location location) {
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("latitude",location.getLatitude());
-        map.put("longitude",location.getLongitude());
-        map.put("accuracy",location.getAccuracy());
-        map.put("altitude",location.getAltitude());
-        map.put("speed",location.getSpeed());
-        map.put("timestamp",(double)location.getTime() / 1000);
-
-        channel.invokeMethod("locationUpdate",map);
-    }
 
 
 }

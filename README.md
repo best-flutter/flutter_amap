@@ -104,17 +104,18 @@ import 'package:flutter_amap/flutter_amap.dart';
 
 ```
 
-## Feature
+## 特性
 
-* IOS Support
-* Android Support
-* Support for full screen map
-* Support for location change update
-* Support for basic map options
-
-
-
-
+* [x] android支持
+* [x] ios 支持
+* [x] 不需要新增Activity或Controller就可以展示地图
+* [x] 地图的展示和隐藏
+* [x] 设置地图位置
+* [x] 基本地图选项
+* [x] 定位回调
+* [ ] 展示定制的地图Mark
+* [ ] 搜索api
+* [ ] 更多api
 
 
 

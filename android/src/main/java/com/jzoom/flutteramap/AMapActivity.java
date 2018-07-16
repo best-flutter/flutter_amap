@@ -13,7 +13,6 @@ public class AMapActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         mapView = FlutterAmapPlugin.manager.createView(this);
         mapView.onCreate(savedInstanceState);
         FlutterAmapPlugin.manager.updateProps(mapView, FlutterAmapPlugin.manager.mapViewOptions);

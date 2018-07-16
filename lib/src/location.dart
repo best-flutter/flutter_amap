@@ -1,5 +1,5 @@
 
-import 'latlng.dart';
+import 'package:flutter_amap/src/latlng.dart';
 
 class Location extends LatLng{
 

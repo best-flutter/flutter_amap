@@ -33,6 +33,6 @@ android {
     }
 }
 dependencies {
-    compile 'com.amap.api:3dmap:latest.integration'
+    compile 'com.amap.api:3dmap:6.0.0'
     compile 'com.android.support:appcompat-v7:27.1.1'
 }
