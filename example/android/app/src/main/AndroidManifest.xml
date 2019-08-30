@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.jzoom.flutteramapexample">
 
     <!-- The INTERNET permission is required for development. Specifically,
@@ -15,9 +16,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-     
-
-
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -26,7 +24,8 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="flutter_amap_example"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="9f583b6d4c5a1f05120fbde2c117d18b" />
@@ -52,6 +51,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.jzoom.flutteramap.AMapActivity" android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name="com.jzoom.flutteramap.AMapActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
     </application>
 </manifest>
